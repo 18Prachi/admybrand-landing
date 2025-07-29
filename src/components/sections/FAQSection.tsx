@@ -46,7 +46,7 @@ export const FAQSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
             Frequently Asked{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
               Questions
             </span>
           </h2>
@@ -68,7 +68,7 @@ export const FAQSection: React.FC = () => {
           <p className="text-gray-600 mb-4">Still have questions?</p>
           <a 
             href="#contact" 
-            className="text-blue-600 hover:text-blue-700 font-semibold transition-colors duration-200"
+            className="text-pink-500 hover:text-pink-600 font-semibold transition-colors duration-200"
           >
             Contact our support team →
           </a>

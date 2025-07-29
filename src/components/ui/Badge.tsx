@@ -17,7 +17,7 @@ export const Badge: React.FC<BadgeProps> = ({
   const baseStyles = 'inline-flex items-center rounded-full font-semibold';
   
   const variants = {
-    primary: 'bg-blue-100 text-blue-800',
+    primary: 'bg-gradient-to-r from-pink-100 to-purple-100 text-pink-800',
     secondary: 'bg-gray-100 text-gray-800',
     success: 'bg-green-100 text-green-800',
     warning: 'bg-yellow-100 text-yellow-800',
