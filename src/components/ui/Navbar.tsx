@@ -48,7 +48,7 @@ export const Navbar: React.FC<NavbarProps> = ({
                   key={index}
                   href={link.href}
                   className={cn(
-                    'text-sm font-medium transition-colors duration-200 hover:text-pink-500',
+                    'text-sm font-medium transition-colors duration-200 hover:text-blue-600',
                     isScrolled ? 'text-gray-700' : 'text-white'
                   )}
                 >

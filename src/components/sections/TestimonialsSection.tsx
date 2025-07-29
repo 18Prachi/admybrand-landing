@@ -77,7 +77,7 @@ export const TestimonialsSection: React.FC = () => {
         <div className="text-center mb-16">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
             Loved by{' '}
-          <span className="bg-gradient-to-r from-pink-500 to-purple-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Marketing Teams
             </span>
           </h2>
@@ -94,7 +94,7 @@ export const TestimonialsSection: React.FC = () => {
         {/* Trust Stats */}
         <div className="mt-16 grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
           <div>
-            <div className="text-3xl font-bold text-pink-500 mb-2">10,000+</div>
+            <div className="text-3xl font-bold text-blue-600 mb-2">10,000+</div>
             <div className="text-gray-600">Happy Customers</div>
           </div>
           <div>
