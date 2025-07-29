@@ -57,7 +57,7 @@ export const Footer: React.FC = () => {
           {/* Company Info */}
           <div className="lg:col-span-2">
             <div className="flex items-center space-x-2 mb-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-purple-600 rounded-lg flex items-center justify-center">
                 <Sparkles className="text-white" size={20} />
               </div>
               <span className="text-xl font-bold">ADmyBRAND</span>
@@ -166,7 +166,7 @@ export const Footer: React.FC = () => {
               />
               <button
                 type="submit"
-                className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors duration-200"
+                className="px-6 py-2 bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white rounded-lg font-medium transition-colors duration-200"
               >
                 Subscribe
               </button>
