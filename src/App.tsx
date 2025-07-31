@@ -1,10 +1,10 @@
-import React from 'react';
 import { Sparkles } from 'lucide-react';
 import { Navbar } from './components/ui/Navbar';
 import { HeroSection } from './components/sections/HeroSection';
 import { FeaturesSection } from './components/sections/FeaturesSection';
-import { PricingSection } from './components/sections/PricingSection';
+import PricingCalculator from './components/sections/PricingSection';
 import { TestimonialsSection } from './components/sections/TestimonialsSection';
+import BlogSection from "./components/sections/BlogSection";
 import { FAQSection } from './components/sections/FAQSection';
 import { Footer } from './components/sections/Footer';
 
@@ -35,10 +35,13 @@ function App() {
           <FeaturesSection />
         </div>
         <div id="pricing">
-          <PricingSection />
+          <PricingCalculator />
         </div>
         <div id="testimonials">
           <TestimonialsSection />
+        </div>
+        <div id="blog">
+          <BlogSection />
         </div>
         <div id="faq">
           <FAQSection />

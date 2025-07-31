@@ -1,139 +1,208 @@
-import React from 'react';
-import { Check, Star, Zap } from 'lucide-react';
-import { Card } from '../ui/Card';
-import { Button } from '../ui/Button';
-import { Badge } from '../ui/Badge';
-import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+"use client"
 
-const plans = [
+import type React from "react"
+
+import { useState } from "react"
+import { Card, CardContent, CardHeader, CardTitle } from "../ui/Card"
+import { Button } from "../ui/Button"
+import { Slider } from "../ui/Slider"
+import { Badge } from "../ui/Badge"
+import { Check, Users, Zap, Crown } from "lucide-react"
+
+type PlanType = "starter" | "pro" | "enterprise"
+type BillingType = "monthly" | "annual"
+
+interface Plan {
+  id: PlanType
+  name: string
+  icon: React.ReactNode
+  pricePerUser: number
+  features: string[]
+  color: string
+  popular?: boolean
+}
+
+const plans: Plan[] = [
   {
-    name: 'Starter',
-    price: '$29',
-    period: '/month',
-    description: 'Perfect for small businesses and startups',
-    features: [
-      'Up to 5,000 contacts',
-      '10 AI-powered campaigns',
-      'Basic analytics dashboard',
-      'Email support',
-      'Standard integrations'
-    ],
-    buttonText: 'Start Free Trial',
-    popular: false
+    id: "starter",
+    name: "Starter",
+    icon: <Users className="w-5 h-5" />,
+    pricePerUser: 10,
+    features: ["Basic features", "Email support", "5GB storage", "Basic analytics"],
+    color: "bg-blue-500",
   },
   {
-    name: 'Professional',
-    price: '$99',
-    period: '/month',
-    description: 'Ideal for growing businesses and marketing teams',
-    features: [
-      'Up to 50,000 contacts',
-      'Unlimited AI campaigns',
-      'Advanced analytics & insights',
-      'Priority support',
-      'Premium integrations',
-      'A/B testing suite',
-      'Custom reporting'
-    ],
-    buttonText: 'Start Free Trial',
-    popular: true
+    id: "pro",
+    name: "Pro",
+    icon: <Zap className="w-5 h-5" />,
+    pricePerUser: 25,
+    features: ["All Starter features", "Priority support", "50GB storage", "Advanced analytics", "API access"],
+    color: "bg-purple-500",
+    popular: true,
   },
   {
-    name: 'Enterprise',
-    price: '$299',
-    period: '/month',
-    description: 'For large organizations with complex needs',
+    id: "enterprise",
+    name: "Enterprise",
+    icon: <Crown className="w-5 h-5" />,
+    pricePerUser: 50,
     features: [
-      'Unlimited contacts',
-      'Unlimited everything',
-      'White-label solution',
-      'Dedicated account manager',
-      'Custom integrations',
-      'Advanced security features',
-      'SLA guarantee',
-      'Custom training'
+      "All Pro features",
+      "24/7 phone support",
+      "Unlimited storage",
+      "Custom integrations",
+      "Dedicated manager",
     ],
-    buttonText: 'Contact Sales',
-    popular: false
-  }
-];
+    color: "bg-orange-500",
+  },
+]
 
-export const PricingSection: React.FC = () => {
-  const sectionRef = useScrollAnimation();
+export default function PricingCalculator() {
+  const [selectedPlan, setSelectedPlan] = useState<PlanType>("pro")
+  const [userCount, setUserCount] = useState([10])
+  const [billingType, setBillingType] = useState<BillingType>("monthly")
+
+  const currentPlan = plans.find((plan) => plan.id === selectedPlan)!
+  const monthlyPrice = currentPlan.pricePerUser * userCount[0]
+  const annualPrice = monthlyPrice * 12 * 0.8 // 20% discount for annual
+  const displayPrice = billingType === "monthly" ? monthlyPrice : annualPrice / 12
+  const totalAnnualSavings = billingType === "annual" ? monthlyPrice * 12 * 0.2 : 0
 
   return (
-    <section ref={sectionRef} className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6">
-            Simple, Transparent{' '}
-            <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Pricing
-            </span>
-          </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Choose the perfect plan for your business. All plans include our core AI features 
-            with no hidden fees or surprise charges.
-          </p>
-        </div>
+    <div className="max-w-4xl mx-auto p-6 space-y-8">
+      <div className="text-center space-y-4">
+        <h1 className="text-4xl font-bold">Pricing Calculator</h1>
+        <p className="text-muted-foreground text-lg">Choose your plan and see pricing based on your team size</p>
+      </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12">
-          {plans.map((plan, index) => (
-            <Card 
-              key={index}
-              variant={plan.popular ? 'glass' : 'default'}
-              className={`relative p-8 ${plan.popular ? 'bg-gradient-to-br from-blue-50 to-purple-50 border-2 border-blue-200 transform scale-105' : ''}`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                  <Badge variant="primary" className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2">
-                    <Star size={16} className="mr-1" />
-                    Most Popular
-                  </Badge>
-                </div>
-              )}
-
-              <div className="text-center mb-8">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">{plan.name}</h3>
-                <p className="text-gray-600 mb-6">{plan.description}</p>
-                <div className="flex items-center justify-center mb-2">
-                  <span className="text-5xl font-bold text-gray-900">{plan.price}</span>
-                  <span className="text-gray-600 ml-2">{plan.period}</span>
-                </div>
-                {plan.name === 'Starter' && (
-                  <p className="text-sm text-gray-500">14-day free trial included</p>
-                )}
-              </div>
-
-              <div className="space-y-4 mb-8">
-                {plan.features.map((feature, featureIndex) => (
-                  <div key={featureIndex} className="flex items-center space-x-3">
-                    <Check className="text-green-600 flex-shrink-0" size={20} />
-                    <span className="text-gray-700">{feature}</span>
-                  </div>
-                ))}
-              </div>
-
-              <Button 
-                variant={plan.popular ? 'primary' : 'outline'}
-                size="lg"
-                className="w-full"
-              >
-                {plan.popular && <Zap size={20} className="mr-2" />}
-                {plan.buttonText}
-              </Button>
-            </Card>
-          ))}
-        </div>
-
-        {/* Money Back Guarantee */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex items-center space-x-2 bg-green-50 border border-green-200 rounded-full px-6 py-3">
-            <Check className="text-green-600" size={20} />
-            <span className="text-green-800 font-medium">30-day money-back guarantee</span>
-          </div>
+      {/* Billing Toggle */}
+      <div className="flex justify-center">
+        <div className="flex items-center space-x-4 bg-muted p-1 rounded-lg">
+          <Button
+            variant={billingType === "monthly" ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setBillingType("monthly")}
+            className="relative"
+          >
+            Monthly
+          </Button>
+          <Button
+            variant={billingType === "annual" ? "default" : "ghost"}
+            size="sm"
+            onClick={() => setBillingType("annual")}
+            className="relative"
+          >
+            Annual
+            <Badge variant="secondary" className="ml-2 text-xs">
+              Save 20%
+            </Badge>
+          </Button>
         </div>
       </div>
-    </section>
-  );
-};
+
+      {/* Plan Selection */}
+      <div className="grid md:grid-cols-3 gap-4">
+        {plans.map((plan) => (
+          <Card
+            key={plan.id}
+            className={`cursor-pointer transition-all duration-200 hover:shadow-lg ${
+              selectedPlan === plan.id ? "ring-2 ring-primary shadow-lg scale-105" : "hover:scale-102"
+            } ${plan.popular ? "relative" : ""}`}
+            onClick={() => setSelectedPlan(plan.id)}
+          >
+            {plan.popular && (
+              <Badge className="absolute -top-2 left-1/2 transform -translate-x-1/2 bg-primary">Most Popular</Badge>
+            )}
+            <CardHeader className="text-center pb-4">
+              <div
+                className={`w-12 h-12 ${plan.color} rounded-lg flex items-center justify-center text-white mx-auto mb-2`}
+              >
+                {plan.icon}
+              </div>
+              <CardTitle className="text-xl">{plan.name}</CardTitle>
+              <div className="text-2xl font-bold">
+                ${plan.pricePerUser}
+                <span className="text-sm font-normal text-muted-foreground">/user/month</span>
+              </div>
+            </CardHeader>
+            <CardContent>
+              <ul className="space-y-2">
+                {plan.features.map((feature, index) => (
+                  <li key={index} className="flex items-center text-sm">
+                    <Check className="w-4 h-4 text-green-500 mr-2 flex-shrink-0" />
+                    {feature}
+                  </li>
+                ))}
+              </ul>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+
+      {/* User Count Slider */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center justify-between">
+            <span>Number of Users</span>
+            <Badge variant="outline" className="text-lg px-3 py-1">
+              {userCount[0]} {userCount[0] === 1 ? "user" : "users"}
+            </Badge>
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <Slider value={userCount} onValueChange={setUserCount} max={100} min={1} step={1} className="w-full" />
+          <div className="flex justify-between text-sm text-muted-foreground">
+            <span>1 user</span>
+            <span>100 users</span>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Pricing Summary */}
+      <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl">Pricing Summary</CardTitle>
+        </CardHeader>
+        <CardContent className="space-y-6">
+          <div className="text-center space-y-2">
+            <div className="text-4xl font-bold">
+              ${displayPrice.toFixed(0)}
+              <span className="text-lg font-normal text-muted-foreground">/month</span>
+            </div>
+            <p className="text-muted-foreground">
+              {currentPlan.name} plan for {userCount[0]} {userCount[0] === 1 ? "user" : "users"}
+            </p>
+          </div>
+
+          {billingType === "annual" && (
+            <div className="bg-green-50 border border-green-200 rounded-lg p-4 text-center">
+              <p className="text-green-800 font-medium">
+                💰 You save ${totalAnnualSavings.toFixed(0)} per year with annual billing!
+              </p>
+            </div>
+          )}
+
+          <div className="grid grid-cols-2 gap-4 text-sm">
+            <div className="space-y-1">
+              <p className="text-muted-foreground">Monthly total:</p>
+              <p className="font-semibold">${displayPrice.toFixed(0)}</p>
+            </div>
+            <div className="space-y-1">
+              <p className="text-muted-foreground">Annual total:</p>
+              <p className="font-semibold">
+                ${billingType === "annual" ? annualPrice.toFixed(0) : (monthlyPrice * 12).toFixed(0)}
+              </p>
+            </div>
+          </div>
+
+          <Button className="w-full" size="lg">
+            Get Started with {currentPlan.name}
+          </Button>
+
+          <p className="text-center text-xs text-muted-foreground">
+            No setup fees • Cancel anytime • 14-day free trial
+          </p>
+        </CardContent>
+      </Card>
+    </div>
+  )
+}

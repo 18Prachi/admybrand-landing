@@ -6,13 +6,15 @@ interface CardProps {
   className?: string;
   variant?: 'default' | 'glass' | 'gradient';
   hover?: boolean;
+  onClick?: () => void;
 }
 
 export const Card: React.FC<CardProps> = ({
   children,
   className,
   variant = 'default',
-  hover = false
+  hover = false,
+  onClick
 }) => {
   const baseStyles = 'rounded-2xl p-6 transition-all duration-300';
   
@@ -25,8 +27,44 @@ export const Card: React.FC<CardProps> = ({
   const hoverStyles = hover ? 'hover:shadow-2xl hover:scale-105 cursor-pointer' : '';
 
   return (
-    <div className={cn(baseStyles, variants[variant], hoverStyles, className)}>
+    <div 
+      className={cn(baseStyles, variants[variant], hoverStyles, className)}
+      onClick={onClick}
+    >
       {children}
     </div>
+  );
+};
+
+export const CardContent: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className
+}) => {
+  return (
+    <div className={cn('p-6', className)}>
+      {children}
+    </div>
+  );
+};
+
+export const CardHeader: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className
+}) => {
+  return (
+    <div className={cn('pb-4', className)}>
+      {children}
+    </div>
+  );
+};
+
+export const CardTitle: React.FC<{ children: React.ReactNode; className?: string }> = ({
+  children,
+  className
+}) => {
+  return (
+    <h3 className={cn('text-xl font-semibold', className)}>
+      {children}
+    </h3>
   );
 };
