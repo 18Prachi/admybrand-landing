@@ -36,5 +36,79 @@ A beautiful, responsive landing page built for **ADmyBRAND AI Suite**, designed 
 
 ---
 
-## 📁 Folder Structure (Simplified)
+## 🧠 AI Usage Report
 
+See [`AI_USAGE_REPORT.md`](./AI_USAGE_REPORT.md) for details on AI tools, prompts, and manual vs AI split.
+
+---
+
+## 📂 Project Structure
+
+```
+.
+├── .bolt/                                               # Bolt configuration
+├── public/
+│ └── assets/                                            # Static assets like landing page images
+├── src/ # Main source code
+│ ├── components/                                        # Reusable UI components and sections
+│ │ ├── forms/
+│ │ │ └── ContactForm.tsx                                # Contact form component
+│ │ ├── sections/
+│ │ │ ├── BlogSection.tsx
+│ │ │ ├── FAQSection.tsx
+│ │ │ ├── FeaturesSection.tsx
+│ │ │ ├── Footer.tsx
+│ │ │ ├── HeroSection.tsx
+│ │ │ ├── PricingSection.tsx
+│ │ │ └── TestimonialsSection.tsx
+│ │ ├── ui/
+│ │ │ ├── Accordion.tsx
+│ │ │ ├── Badge.tsx
+│ │ │ ├── BlogCard.tsx
+│ │ │ ├── Button.tsx
+│ │ │ ├── Card.tsx
+│ │ │ ├── Carousel.tsx
+│ │ │ ├── Input.tsx
+│ │ │ ├── Modal.tsx
+│ │ │ ├── Navbar.tsx
+│ │ │ └── Slider.tsx
+│ │ └── utils/
+│ │ └── cn.ts                                                   # Class name utility function
+│ ├── hooks/
+│ │ └── useScrollAnimation.ts                                   # Custom scroll animation hook
+│ ├── App.tsx # Root React component
+│ ├── main.tsx # Entry point for Vite
+│ ├── index.css # Global styles
+│ └── vite-env.d.ts # TypeScript environment definitions
+├── .gitignore
+├── README.md
+├── index.html                                                   # HTML template
+├── package.json                                                 # Project metadata and scripts
+├── package-lock.json                                            # Lock file
+├── postcss.config.js                                            # PostCSS configuration
+├── tailwind.config.js                                           # Tailwind CSS configuration
+├── eslint.config.js                                             # ESLint configuration
+├── tsconfig.json                                                # TypeScript base config
+├── tsconfig.app.json                                            # TypeScript config for app
+├── tsconfig.node.json                                           # TypeScript config for node
+└── vite.config.ts                                               # Vite configuration
+```
+
+## 📦 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/admybrand-landing.git
+cd admybrand-landing
+```
+### 2. Install Dependencies
+```bash
+npm install
+```
+### 3. Run Locally
+```bash
+npm run dev
+```
+
+Visit `http://localhost:5173` in your browser.
