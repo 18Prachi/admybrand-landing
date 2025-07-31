@@ -112,3 +112,20 @@ npm run dev
 ```
 
 Visit `http://localhost:5173` in your browser.
+
+## 📤 Deployment
+
+This app is optimized for **Vercel** deployment:
+
+```bash
+npx vercel
+```
+Or push to GitHub and connect your repo on Vercel.
+
+## 🙌 Credits
+
+```
+Hero Video: Pexels
+Blog Images: Generated using Adobe Firefly
+AI Tools Used: GitHub Copilot v0.dev ChatGPT Bolt.new
+```
